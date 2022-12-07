@@ -43,7 +43,6 @@ def check_stacks():
 
 if __name__ == "__main__":
     in_file = "/home/adam/projects/adventofcode/2022/5/input.txt"
-    num_overlap = 0
     with open(in_file) as f:
         for l in f:
             move_crates(l.strip())
