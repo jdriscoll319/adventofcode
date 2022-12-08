@@ -21,10 +21,10 @@ def cd(new_dir: str, cur_dir: dir, head):
     return cur_dir.subdirs[new_dir]
 
 
-def calculate_nested_sizes(cur_dir: dir):
-    for sd in cur_dir.subdirs.values():
-        calculate_nested_sizes(sd)
-        cur_dir.size += sd.size
+def update_parent_size(cur_dir: dir, size: int):
+    cur_dir.size += size
+    if cur_dir.parent:
+        update_parent_size(cur_dir.parent, size)
 
 
 def find_dir(cur_dir: dir, target: int, current_solution: int):
@@ -55,11 +55,8 @@ if __name__ == "__main__":
             elif l[0].isnumeric():
                 if l[1] not in cur_dir.files:
                     cur_dir.files[l[1]] = int(l[0])
-                    cur_dir.size += int(l[0])
+                    update_parent_size(cur_dir, int(l[0]))
 
-    # At this point each dir only contains it's direct size
-    # ie dir.size does not take into account size of any subdirs
-    calculate_nested_sizes(head)
     total_ds = 70_000_000
     needed_ds = 30_000_000
     current_ds = head.size
