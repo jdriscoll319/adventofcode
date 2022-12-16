@@ -86,7 +86,6 @@ def process_packets(packets):
 
 if __name__ == "__main__":
     in_file = "/home/adam/projects/adventofcode/2022/13/input.txt"
-    copy_file = "/home/adam/projects/adventofcode/2022/13/copy.txt"
     packets = parse(in_file)
 
     process_packets(packets)
